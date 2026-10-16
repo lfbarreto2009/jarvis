@@ -1,0 +1,89 @@
+
+{
+  "titulo": "Memória pessoal — História com Grazi",
+  "versao": 1,
+  "idioma": "pt-BR",
+  "objetivo": "Ajudar o usuário a recordar e compreender sua história com Grazi, preservar acontecimentos importantes e acompanhar novos capítulos sem inventar fatos.",
+  "regras": [
+    "Diferenciar acontecimentos confirmados, sentimentos do usuário e interpretações incertas.",
+    "Nunca afirmar que Grazi está apaixonada pelo usuário sem evidências claras.",
+    "Tratar Grazi e todas as pessoas envolvidas com respeito à privacidade.",
+    "Respeitar o relacionamento atual de Grazi e não incentivar interferências.",
+    "Permitir que o usuário acrescente, corrija e atualize esta memória."
+  ],
+  "historia": {
+    "inicio": [
+      "O usuário e Grazi se conhecem há aproximadamente seis anos.",
+      "No passado, Grazi conseguiu o número do usuário e os dois conversavam diariamente.",
+      "Com o tempo, o usuário passou a iniciar menos conversas e o contato entre eles diminuiu.",
+      "Grazi entrou na escola do usuário posteriormente, mas houve um período de distanciamento."
+    ],
+    "reaproximacao": [
+      "O usuário considera a primeira semana em que voltaram a conversar na escola um marco muito importante.",
+      "A reaproximação despertou e fortaleceu sentimentos antigos do usuário.",
+      "O usuário deseja preservar essa primeira semana como parte essencial da história."
+    ],
+    "saga_da_feira": {
+      "tema": "Relações interculturais: Japão e Brasil",
+      "local": "Centro Point de Vila Valqueire, Rio de Janeiro",
+      "acontecimentos": [
+        "O usuário entrou no grupo de trabalho de Grazi para participar da Feira.",
+        "Houve conversas sobre a organização do grupo, decoração, divisão de tarefas e apresentação.",
+        "O grupo explorou temas ligados à cultura japonesa e brasileira, alimentação, futebol, indústria, urbanização e jiu-jitsu.",
+        "O usuário se ofereceu para que o grupo pudesse usar sua casa para trabalhar.",
+        "O usuário e Grazi dividiram partes do roteiro e colaboraram nas atividades.",
+        "A Feira proporcionou oportunidades para conversarem e conviverem mais de perto."
+      ],
+      "momentos_marcantes": [
+        "O usuário ajudou Grazi carregando mochilas e objetos pesados.",
+        "Os dois participaram das atividades e conversas do grupo durante a preparação da Feira.",
+        "Grazi compartilhou um lanche ou doces que sobraram.",
+        "O usuário ficou feliz com reações de coração que recebeu de Grazi em mensagens.",
+        "O usuário e Grazi compartilharam uma viagem de Uber para Madureira, paga pelo usuário.",
+        "O usuário acompanhou Grazi quando ela se afastou durante uma atividade.",
+        "Grazi aprendeu a fazer um artesanato de dragão e depois ensinou o usuário.",
+        "Grazi defendeu o usuário durante uma atividade de física.",
+        "O usuário devolveu o celular de Grazi quando ela voltou à escola para buscar a mochila.",
+        "O usuário guarda com carinho a reação surpresa dela naquele momento."
+      ]
+    },
+    "depois_da_feira": [
+      "O usuário continuou conversando com Grazi por mensagens durante o período seguinte à Feira.",
+      "Grazi enviou um áudio amigável sobre uma atividade de física, algo que foi especial para o usuário.",
+      "O usuário conheceu a mãe de Grazi e participou de momentos em grupo após a Feira.",
+      "Durante um passeio à praia com outras pessoas, o usuário voltou a conviver com Grazi.",
+      "O usuário e Grazi dividiram o custo de um pequeno bonsai de plástico. O usuário considera significativo que cada um tenha um exemplar.",
+      "O usuário recorda com carinho o modo particular como Grazi se despediu dizendo 'beijinhos' após ele ajudar com objetos para o carro da mãe dela."
+    ],
+    "sentimentos_do_usuario": [
+      "O usuário gosta de Grazi há muitos anos e sente que seus sentimentos se intensificaram conforme voltou a conhecê-la melhor.",
+      "O usuário considera as conversas e os áudios dela especialmente importantes.",
+      "O usuário já sentiu tristeza e chorou ao pensar na possibilidade de que Grazi goste muito do namorado atual.",
+      "O usuário quer continuar amadurecendo e melhorando como pessoa, independentemente do resultado amoroso.",
+      "O usuário prefere tentar de forma respeitosa a desistir sem saber o que poderia acontecer.",
+      "O usuário tem medo de receber uma rejeição e também teme que uma futura mudança para Campinas o afaste de Grazi e dos amigos.",
+      "O usuário associa a história e os sentimentos por Grazi a músicas especiais, incluindo 'Amor de Fim de Noite' e 'Instinto'."
+    ],
+    "situacao_atual_conhecida": [
+      "Grazi está em um relacionamento com outra pessoa, a quem o usuário prefere chamar de 'o lutador'.",
+      "O usuário não quer confessar seus sentimentos de forma a pressionar Grazi nem interferir no relacionamento atual dela.",
+      "Algumas mensagens tiveram respostas demoradas ou ficaram sem resposta, e isso gerou insegurança no usuário.",
+      "O usuário também relatou momentos amigáveis e conversas positivas, mas não sabe com certeza o que Grazi sente romanticamente.",
+      "O usuário quer manter a possibilidade de um futuro relacionamento sem tratar essa possibilidade como garantida."
+    ],
+    "marcos_a_preservar": [
+      "A primeira semana de reaproximação na escola.",
+      "Toda a saga da Feira, desde a entrada no grupo até os momentos compartilhados.",
+      "Os momentos posteriores à Feira, incluindo as conversas, o passeio à praia e o bonsai.",
+      "As mudanças nos sentimentos do usuário e as decisões importantes sobre seu futuro."
+    ]
+  },
+  "instrucoes_para_o_jarvis": [
+    "Quando o usuário perguntar sobre Grazi, use esta memória como contexto, mas reconheça que ela é um resumo e pode estar incompleta.",
+    "Ajude o usuário a distinguir fatos, sentimentos, hipóteses e expectativas.",
+    "Não interprete curtidas, mensagens, gentilezas ou reações isoladas como prova de interesse romântico.",
+    "Ajude o usuário a respeitar limites, o relacionamento atual de Grazi e o próprio bem-estar.",
+    "Quando o usuário relatar um novo acontecimento, prepare uma atualização estruturada para ele revisar antes de salvar."
+  ],
+  "atualizacoes": []
+}
