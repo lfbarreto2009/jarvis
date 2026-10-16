@@ -726,6 +726,20 @@ footer {
 
   addLog("SISTEMA", "Interface JARVIS V2.0 pronta.");
 })();
+  let memoriaGrazi = null;
+
+fetch("./memoria_grazi.json")
+  .then(resposta => {
+    if (!resposta.ok) throw new Error("Erro ao carregar");
+    return resposta.json();
+  })
+  .then(dados => {
+    memoriaGrazi = dados;
+    addLog("MEMÓRIA", "História com Grazi carregada.");
+  })
+  .catch(() => {
+    addLog("MEMÓRIA", "Falha ao carregar a memória.");
+  });
 </script>
 </body>
 </html>
