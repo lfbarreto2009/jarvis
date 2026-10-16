@@ -1,53 +1,731 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JARVIS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#030813">
+<title>J.A.R.V.I.S. — Sistema Pessoal</title>
+
 <style>
-body {
-  background: #050b14;
-  color: #59e7ff;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 40px 15px;
+:root {
+  --cyan: #00eaff;
+  --blue: #078cff;
+  --bg: #030813;
+  --panel: rgba(5, 25, 44, .78);
+  --muted: #7ba9bd;
 }
-h1 { letter-spacing: 8px; }
-.orb {
-  width: 150px;
-  height: 150px;
-  border: 3px solid #59e7ff;
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: #e4fbff;
+  background:
+    radial-gradient(ellipse at 50% 35%, #092943 0%, transparent 48%),
+    linear-gradient(160deg, #02050d, #061522 60%, #020711);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .17;
+  background-image:
+    linear-gradient(rgba(0,234,255,.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,234,255,.13) 1px, transparent 1px);
+  background-size: 35px 35px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+main {
+  position: relative;
+  width: min(100%, 760px);
+  margin: auto;
+  padding: max(24px, env(safe-area-inset-top)) 18px
+    max(30px, env(safe-area-inset-bottom));
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #12465c;
+  padding-bottom: 16px;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: var(--cyan);
+  text-shadow: 0 0 18px #00cfff77;
+}
+
+.version {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+.status-pill {
+  font-size: 10px;
+  color: var(--cyan);
+  border: 1px solid #087d98;
+  border-radius: 30px;
+  padding: 8px 10px;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+
+.indicator {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  margin: 40px auto;
-  box-shadow: 0 0 35px #168bff;
+  background: #36ffb0;
+  box-shadow: 0 0 10px #36ffb0;
+  margin-right: 5px;
+}
+
+.hero {
+  text-align: center;
+  padding: 22px 0 18px;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 4px;
+}
+
+.core-wrap {
+  height: 255px;
   display: grid;
   place-items: center;
+  position: relative;
+  margin: 3px auto 5px;
 }
+
 .core {
-  width: 45px;
-  height: 45px;
-  background: #59e7ff;
+  width: 174px;
+  height: 174px;
+  position: relative;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
-  box-shadow: 0 0 30px #59e7ff;
+  background: radial-gradient(circle, #0a4160 0%, #06233c 45%, #03101d 70%);
+  box-shadow: 0 0 30px #00cfff22, inset 0 0 28px #00d9ff25;
+  animation: breathe 3s ease-in-out infinite;
 }
-button {
-  background: #102a40;
-  border: 1px solid #59e7ff;
-  border-radius: 10px;
-  padding: 14px;
+
+.core::before, .core::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1px solid #00eaff99;
+  border-left-color: transparent;
+  border-right-color: #00eaff22;
+  animation: spin 9s linear infinite;
+}
+
+.core::after {
+  inset: -26px;
+  border-color: #087fff77;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  animation: spin 13s linear infinite reverse;
+}
+
+.core-inner {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 2px solid #00dfff;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle, #0a6b91, #031a2e 70%);
+  box-shadow: 0 0 25px #00cfff88, inset 0 0 25px #00cfff55;
+}
+
+.core-inner span {
+  font-size: 27px;
+  font-weight: 300;
+  letter-spacing: 2px;
   color: white;
-  font-size: 16px;
+  text-shadow: 0 0 15px var(--cyan);
+}
+
+.orbit {
+  position: absolute;
+  inset: 4px;
+  border: 1px dashed #00eaff44;
+  border-radius: 50%;
+  animation: spin 25s linear infinite;
+}
+
+.core-wrap.listening .core {
+  box-shadow: 0 0 55px #00eaff88, inset 0 0 40px #00d9ff77;
+}
+
+.core-wrap.listening .core-inner {
+  border-color: #65ffdc;
+  box-shadow: 0 0 38px #00ffc888, inset 0 0 35px #00ffc855;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes breathe {
+  0%, 100% { transform: scale(.97); }
+  50% { transform: scale(1.03); }
+}
+
+h1 {
+  font-size: 28px;
+  letter-spacing: 7px;
+  margin: 8px 0;
+  font-weight: 500;
+  text-shadow: 0 0 22px #00cfff66;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+#status {
+  color: var(--cyan);
+  margin-top: 17px;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.equalizer {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 8px 0 14px;
+}
+
+.equalizer span {
+  width: 3px;
+  height: 5px;
+  border-radius: 5px;
+  background: var(--cyan);
+  box-shadow: 0 0 7px #00cfff88;
+  animation: wave 1s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.equalizer.active span { animation-play-state: running; }
+.equalizer span:nth-child(3n) { animation-delay: -.7s; }
+.equalizer span:nth-child(3n + 1) { animation-delay: -.3s; }
+
+@keyframes wave {
+  from { height: 4px; }
+  to { height: 29px; }
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid #10506a;
+  border-radius: 13px;
+  padding: 16px;
+  margin-top: 13px;
+  box-shadow: 0 8px 28px #0003;
+  backdrop-filter: blur(10px);
+}
+
+.panel-title {
+  color: var(--cyan);
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 13px;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+.metric {
+  background: #061725;
+  border: 1px solid #10364a;
+  border-radius: 8px;
+  padding: 12px 6px;
+  text-align: center;
+  min-width: 0;
+}
+
+.metric .value {
+  font-size: 18px;
+  color: #e4fbff;
+  margin-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+.metric .label {
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+#log {
+  height: 125px;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #a8cbd9;
+  overflow-wrap: anywhere;
+}
+
+.log-line { margin: 5px 0; }
+.log-line b { color: var(--cyan); font-weight: 500; }
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.action {
+  min-height: 49px;
+  border-radius: 8px;
+  border: 1px solid #087d9d;
+  color: var(--cyan);
+  background: linear-gradient(135deg, #08324b, #061b2c);
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 12px 8px;
+}
+
+.action.primary {
+  color: #001019;
+  background: linear-gradient(135deg, #00f0ff, #078cff);
+  border-color: #5cf6ff;
+  font-weight: 800;
+  box-shadow: 0 0 20px #00cfff30;
+}
+
+.action:active { transform: scale(.98); }
+
+.command-row {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  min-width: 0;
+  flex: 1;
+  padding: 13px 12px;
+  border-radius: 8px;
+  background: #020b14;
+  border: 1px solid #16455a;
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
+input:focus { border-color: var(--cyan); }
+
+.send {
+  padding: 0 15px;
+  border: 1px solid #00cfff;
+  border-radius: 8px;
+  background: #07344a;
+  color: var(--cyan);
+}
+
+.commands {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.chip {
+  border: 1px solid #14516a;
+  background: #061b2b;
+  color: #a8e8f5;
+  border-radius: 30px;
+  font-size: 11px;
+  padding: 9px 12px;
+}
+
+footer {
+  text-align: center;
+  color: #527f91;
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-top: 23px;
+}
+
+@media (max-width: 380px) {
+  .brand { font-size: 18px; }
+  .core-wrap { height: 230px; }
+  .core { width: 150px; height: 150px; }
+  .core-inner { width: 95px; height: 95px; }
+  h1 { font-size: 24px; }
 }
 </style>
 </head>
+
 <body>
-<h1>J.A.R.V.I.S.</h1>
-<p>SISTEMA PESSOAL INICIALIZADO</p>
-<div class="orb"><div class="core"></div></div>
-<p id="status">AGUARDANDO COMANDO</p>
-<button onclick="document.getElementById('status').textContent='JARVIS ONLINE'">
-INICIAR SISTEMA
-</button>
+<main>
+  <header>
+    <div>
+      <div class="brand">J.A.R.V.I.S.</div>
+      <div class="version">PERSONAL AI SYSTEM · V2.0</div>
+    </div>
+    <div class="status-pill">
+      <span class="indicator"></span> SYSTEM READY
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">JUST A RATHER VERY INTELLIGENT SYSTEM</div>
+
+    <div class="core-wrap" id="coreWrap">
+      <div class="core">
+        <div class="orbit"></div>
+        <div class="core-inner"><span>J</span></div>
+      </div>
+    </div>
+
+    <h1>J.A.R.V.I.S.</h1>
+    <div class="subtitle">INTERFACE DE ASSISTÊNCIA PESSOAL</div>
+    <div id="status">SISTEMA INICIALIZADO</div>
+
+    <div class="equalizer" id="equalizer">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title">▸ MONITORAMENTO DO SISTEMA</div>
+    <div class="metrics">
+      <div class="metric">
+        <div class="value" id="clock">--:--</div>
+        <div class="label">HORÁRIO LOCAL</div>
+      </div>
+      <div class="metric">
+        <div class="value" id="date">--/--</div>
+        <div class="label">DATA</div>
+      </div>
+      <div class="metric">
+        <div class="value" id="voiceState">PRONTO</div>
+        <div class="label">MÓDULO DE VOZ</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title">▸ TERMINAL DE ATIVIDADE</div>
+    <div id="log" aria-live="polite">
+      <div class="log-line"><b>[JARVIS]</b> Sistema carregado.</div>
+      <div class="log-line"><b>[JARVIS]</b> Aguardando instruções.</div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button class="action primary" id="startVoice">🎙 ATIVAR VOZ</button>
+    <button class="action" id="stopVoice">■ PARAR ESCUTA</button>
+  </div>
+
+  <section class="panel">
+    <div class="panel-title">▸ ENVIAR COMANDO</div>
+    <form id="commandForm" class="command-row">
+      <input id="commandInput" type="text"
+        placeholder="Digite seu comando..." autocomplete="off">
+      <button class="send" type="submit">ENVIAR</button>
+    </form>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title">▸ COMANDOS DISPONÍVEIS</div>
+    <div class="commands">
+      <button class="chip" data-command="Que horas são?">Que horas são?</button>
+      <button class="chip" data-command="Qual é a data de hoje?">Data de hoje</button>
+      <button class="chip" data-command="Como você está?">Status do sistema</button>
+      <button class="chip" data-command="Abrir YouTube">Abrir YouTube</button>
+      <button class="chip" data-command="Abrir Google">Abrir Google</button>
+      <button class="chip" data-command="Ajuda">Ajuda</button>
+    </div>
+  </section>
+
+  <footer>J.A.R.V.I.S. PERSONAL INTERFACE · V2.0</footer>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  const status = $("status");
+  const log = $("log");
+  const coreWrap = $("coreWrap");
+  const equalizer = $("equalizer");
+  const voiceState = $("voiceState");
+  const input = $("commandInput");
+
+  let recognition = null;
+  let listening = false;
+  let manualStop = false;
+
+  function addLog(who, message) {
+    const line = document.createElement("div");
+    line.className = "log-line";
+
+    const label = document.createElement("b");
+    label.textContent = "[" + who + "] ";
+
+    line.appendChild(label);
+    line.appendChild(document.createTextNode(message));
+    log.appendChild(line);
+
+    while (log.children.length > 35) {
+      log.removeChild(log.firstChild);
+    }
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function setStatus(message) {
+    status.textContent = message;
+  }
+
+  function updateClock() {
+    const now = new Date();
+    $("clock").textContent = now.toLocaleTimeString("pt-BR", {
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+    $("date").textContent = now.toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit"
+    });
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  function speak(message) {
+    if (!("speechSynthesis" in window)) {
+      addLog("SISTEMA", "Voz sintetizada não disponível neste navegador.");
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(message);
+    utterance.lang = "pt-BR";
+    utterance.rate = 1;
+    utterance.pitch = 0.88;
+    utterance.volume = 1;
+
+    utterance.onstart = () => {
+      equalizer.classList.add("active");
+      setStatus("JARVIS FALANDO");
+    };
+
+    utterance.onend = () => {
+      equalizer.classList.remove("active");
+      if (!listening) setStatus("AGUARDANDO COMANDO");
+    };
+
+    utterance.onerror = () => {
+      equalizer.classList.remove("active");
+      if (!listening) setStatus("SISTEMA ONLINE");
+    };
+
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function normalize(text) {
+    return text.toLocaleLowerCase("pt-BR")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim();
+  }
+
+  function executeCommand(original) {
+    const command = normalize(original);
+    if (!command) return;
+
+    addLog("VOCÊ", original);
+    setStatus("PROCESSANDO COMANDO");
+
+    let response = "";
+
+    if (command.includes("que horas") || command === "horas") {
+      response = "Agora são " + new Date().toLocaleTimeString("pt-BR", {
+        hour: "2-digit", minute: "2-digit"
+      }) + ".";
+    } else if (command.includes("data de hoje") ||
+               command.includes("dia e hoje") ||
+               command.includes("qual e a data") ||
+               command === "data") {
+      response = "Hoje é " + new Date().toLocaleDateString("pt-BR", {
+        weekday: "long", day: "numeric", month: "long", year: "numeric"
+      }) + ".";
+    } else if (command.includes("como voce esta") ||
+               command.includes("status") ||
+               command.includes("sistema online")) {
+      response = "Todos os módulos locais estão prontos. Estou aguardando suas instruções.";
+    } else if (command.includes("seu nome") ||
+               command.includes("quem e voce") ||
+               command.includes("quem e voce")) {
+      response = "Eu sou JARVIS, seu assistente pessoal. Sistema pronto para ajudar.";
+    } else if (command.includes("obrigado") ||
+               command.includes("obrigada")) {
+      response = "Sempre à disposição.";
+    } else if (command.includes("ola") ||
+               command.includes("bom dia") ||
+               command.includes("boa tarde") ||
+               command.includes("boa noite")) {
+      response = "Olá. É um prazer falar com você. Como posso ajudar?";
+    } else if (command.includes("abrir youtube")) {
+      response = "Abrindo o YouTube.";
+      window.open("https://www.youtube.com/", "_blank", "noopener");
+    } else if (command.includes("abrir google")) {
+      response = "Abrindo o Google.";
+      window.open("https://www.google.com/", "_blank", "noopener");
+    } else if (command.includes("abrir instagram")) {
+      response = "Abrindo o Instagram.";
+      window.open("https://www.instagram.com/", "_blank", "noopener");
+    } else if (command.includes("ajuda") ||
+               command.includes("comandos")) {
+      response = "Você pode perguntar as horas, consultar a data, verificar meu status ou pedir para abrir YouTube, Google e Instagram.";
+    } else if (command.includes("parar de falar")) {
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      response = "Entendido.";
+    } else {
+      response = "Ainda não tenho uma resposta para esse comando. Tente perguntar as horas, consultar a data ou dizer ajuda.";
+    }
+
+    addLog("JARVIS", response);
+    speak(response);
+
+    if (!("speechSynthesis" in window)) {
+      setStatus("COMANDO PROCESSADO");
+    }
+  }
+
+  function startListening() {
+    const SpeechRecognition = window.SpeechRecognition ||
+                              window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      voiceState.textContent = "INDISPONÍVEL";
+      setStatus("VOZ NÃO SUPORTADA NESTE NAVEGADOR");
+      addLog("SISTEMA", "Reconhecimento de voz não está disponível. Use o campo de texto.");
+      return;
+    }
+
+    if (listening) return;
+
+    try {
+      recognition = new SpeechRecognition();
+      recognition.lang = "pt-BR";
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      manualStop = false;
+
+      recognition.onstart = () => {
+        listening = true;
+        voiceState.textContent = "ESCUTANDO";
+        coreWrap.classList.add("listening");
+        equalizer.classList.add("active");
+        setStatus("ESTOU ESCUTANDO...");
+        addLog("SISTEMA", "Microfone ativado. Pode falar.");
+      };
+
+      recognition.onresult = event => {
+        const transcript = event.results[0][0].transcript;
+        executeCommand(transcript);
+      };
+
+      recognition.onerror = event => {
+        addLog("SISTEMA", "Erro de voz: " + event.error + ".");
+        if (event.error === "not-allowed" ||
+            event.error === "service-not-allowed") {
+          setStatus("PERMISSÃO DE MICROFONE NECESSÁRIA");
+        } else if (event.error === "no-speech") {
+          setStatus("NENHUMA FALA DETECTADA");
+        } else {
+          setStatus("VOZ INDISPONÍVEL");
+        }
+      };
+
+      recognition.onend = () => {
+        listening = false;
+        voiceState.textContent = "PRONTO";
+        coreWrap.classList.remove("listening");
+        equalizer.classList.remove("active");
+        if (!manualStop) setStatus("AGUARDANDO COMANDO");
+      };
+
+      recognition.start();
+    } catch (error) {
+      listening = false;
+      setStatus("NÃO FOI POSSÍVEL INICIAR A VOZ");
+      addLog("SISTEMA", "Confira a permissão do microfone e tente novamente.");
+    }
+  }
+
+  function stopListening() {
+    manualStop = true;
+    if (recognition && listening) {
+      recognition.stop();
+    }
+    listening = false;
+    voiceState.textContent = "PRONTO";
+    coreWrap.classList.remove("listening");
+    equalizer.classList.remove("active");
+    setStatus("ESCUTA ENCERRADA");
+    addLog("SISTEMA", "Escuta encerrada.");
+  }
+
+  $("startVoice").addEventListener("click", startListening);
+  $("stopVoice").addEventListener("click", stopListening);
+
+  $("commandForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const value = input.value.trim();
+    if (!value) return;
+    input.value = "";
+    executeCommand(value);
+  });
+
+  document.querySelectorAll("[data-command]").forEach(button => {
+    button.addEventListener("click", () => {
+      executeCommand(button.dataset.command);
+    });
+  });
+
+  addLog("SISTEMA", "Interface JARVIS V2.0 pronta.");
+})();
+</script>
 </body>
 </html>
