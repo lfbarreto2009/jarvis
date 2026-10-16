@@ -569,6 +569,26 @@ footer {
 
   function executeCommand(original) {
     const command = normalize(original);
+    if (
+  command.includes("grazi") ||
+  command.includes("minha historia") ||
+  command.includes("nossa historia")
+) {
+  if (!memoriaGrazi) {
+    speak("Ainda estou carregando minha memória sobre a Grazi. Tente novamente em alguns segundos.");
+    return;
+  }
+
+  const historia = memoriaGrazi.historia;
+  speak(
+    "Eu tenho registros da sua história com a Grazi. " +
+    "Vocês se conhecem há anos e voltaram a se aproximar na escola. " +
+    "A Feira foi um marco importante, com trabalhos em grupo e momentos de convivência. " +
+    "Depois da Feira, vocês continuaram conversando e tiveram outros momentos marcantes. " +
+    "Seus sentimentos são fortes, mas eu não posso afirmar que ela sente o mesmo por você."
+  );
+  return;
+}
     if (!command) return;
 
     addLog("VOCÊ", original);
