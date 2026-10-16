@@ -1,449 +1,137 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#030813">
-<title>J.A.R.V.I.S. — Sistema Pessoal</title>
-
+<title>J.A.R.V.I.S. — Assistente Pessoal</title>
 <style>
 :root {
-  --cyan: #00eaff;
-  --blue: #078cff;
-  --bg: #030813;
-  --panel: rgba(5, 25, 44, .78);
-  --muted: #7ba9bd;
+  --cyan:#00eaff;
+  --blue:#078cff;
+  --bg:#030813;
+  --panel:rgba(5,25,44,.86);
+  --muted:#7ba9bd;
 }
-* { box-sizing: border-box; }
-
+* { box-sizing:border-box; }
 body {
-  margin: 0;
-  min-height: 100vh;
-  min-height: 100dvh;
-  color: #e4fbff;
-  background:
-    radial-gradient(ellipse at 50% 35%, #092943 0%, transparent 48%),
-    linear-gradient(160deg, #02050d, #061522 60%, #020711);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  overflow-x: hidden;
+  margin:0; min-height:100vh; min-height:100dvh;
+  color:#e4fbff;
+  background:radial-gradient(ellipse at 50% 30%,#092943 0%,transparent 50%),
+    linear-gradient(160deg,#02050d,#061522 60%,#020711);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: .17;
-  background-image:
-    linear-gradient(rgba(0,234,255,.13) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,234,255,.13) 1px, transparent 1px);
-  background-size: 35px 35px;
-  mask-image: linear-gradient(to bottom, black, transparent 90%);
-}
-
 main {
-  position: relative;
-  width: min(100%, 760px);
-  margin: auto;
-  padding: max(24px, env(safe-area-inset-top)) 18px
-    max(30px, env(safe-area-inset-bottom));
+  width:min(100%,760px); margin:auto;
+  padding:max(24px,env(safe-area-inset-top)) 18px 32px;
 }
-
 header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  border-bottom: 1px solid #12465c;
-  padding-bottom: 16px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; border-bottom:1px solid #12465c; padding-bottom:16px;
 }
-
 .brand {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: 4px;
-  color: var(--cyan);
-  text-shadow: 0 0 18px #00cfff77;
+  font-size:22px; font-weight:800; letter-spacing:4px;
+  color:var(--cyan); text-shadow:0 0 18px #00cfff77;
 }
-
-.version {
-  color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 2px;
-  margin-top: 5px;
-}
-
-.status-pill {
-  font-size: 10px;
-  color: var(--cyan);
-  border: 1px solid #087d98;
-  border-radius: 30px;
-  padding: 8px 10px;
-  white-space: nowrap;
-  letter-spacing: 1px;
-}
-
-.indicator {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #36ffb0;
-  box-shadow: 0 0 10px #36ffb0;
-  margin-right: 5px;
-}
-
-.hero {
-  text-align: center;
-  padding: 22px 0 18px;
-}
-
-.eyebrow {
-  color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 4px;
-}
-
-.core-wrap {
-  height: 255px;
-  display: grid;
-  place-items: center;
-  position: relative;
-  margin: 3px auto 5px;
-}
-
+.version { color:var(--muted); font-size:10px; letter-spacing:2px; margin-top:5px; }
+.status-pill { font-size:10px; color:var(--cyan); border:1px solid #087d98;
+  border-radius:30px; padding:8px; white-space:nowrap; }
+.indicator { display:inline-block; width:7px; height:7px; border-radius:50%;
+  background:#36ffb0; margin-right:5px; box-shadow:0 0 10px #36ffb0; }
+.hero { text-align:center; padding:24px 0 18px; }
+.eyebrow { color:var(--muted); font-size:10px; letter-spacing:3px; }
+.core-wrap { height:220px; display:grid; place-items:center; position:relative; }
 .core {
-  width: 174px;
-  height: 174px;
-  position: relative;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: radial-gradient(circle, #0a4160 0%, #06233c 45%, #03101d 70%);
-  box-shadow: 0 0 30px #00cfff22, inset 0 0 28px #00d9ff25;
-  animation: breathe 3s ease-in-out infinite;
+  width:150px; height:150px; border-radius:50%; display:grid; place-items:center;
+  background:radial-gradient(circle,#0a4160,#06233c 55%,#03101d 75%);
+  box-shadow:0 0 35px #00cfff33,inset 0 0 28px #00d9ff25;
+  animation:breathe 3s ease-in-out infinite; position:relative;
 }
-
-.core::before, .core::after {
-  content: "";
-  position: absolute;
-  inset: -14px;
-  border-radius: 50%;
-  border: 1px solid #00eaff99;
-  border-left-color: transparent;
-  border-right-color: #00eaff22;
-  animation: spin 9s linear infinite;
+.core:before,.core:after {
+  content:""; position:absolute; inset:-15px; border:1px solid #00eaff99;
+  border-left-color:transparent; border-radius:50%; animation:spin 9s linear infinite;
 }
-
-.core::after {
-  inset: -26px;
-  border-color: #087fff77;
-  border-top-color: transparent;
-  border-bottom-color: transparent;
-  animation: spin 13s linear infinite reverse;
-}
-
-.core-inner {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  border: 2px solid #00dfff;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(circle, #0a6b91, #031a2e 70%);
-  box-shadow: 0 0 25px #00cfff88, inset 0 0 25px #00cfff55;
-}
-
-.core-inner span {
-  font-size: 27px;
-  font-weight: 300;
-  letter-spacing: 2px;
-  color: white;
-  text-shadow: 0 0 15px var(--cyan);
-}
-
-.orbit {
-  position: absolute;
-  inset: 4px;
-  border: 1px dashed #00eaff44;
-  border-radius: 50%;
-  animation: spin 25s linear infinite;
-}
-
-.core-wrap.listening .core {
-  box-shadow: 0 0 55px #00eaff88, inset 0 0 40px #00d9ff77;
-}
-
-.core-wrap.listening .core-inner {
-  border-color: #65ffdc;
-  box-shadow: 0 0 38px #00ffc888, inset 0 0 35px #00ffc855;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes breathe {
-  0%, 100% { transform: scale(.97); }
-  50% { transform: scale(1.03); }
-}
-
-h1 {
-  font-size: 28px;
-  letter-spacing: 7px;
-  margin: 8px 0;
-  font-weight: 500;
-  text-shadow: 0 0 22px #00cfff66;
-}
-
-.subtitle {
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 3px;
-}
-
-#status {
-  color: var(--cyan);
-  margin-top: 17px;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-.equalizer {
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  margin: 8px 0 14px;
-}
-
-.equalizer span {
-  width: 3px;
-  height: 5px;
-  border-radius: 5px;
-  background: var(--cyan);
-  box-shadow: 0 0 7px #00cfff88;
-  animation: wave 1s ease-in-out infinite alternate;
-  animation-play-state: paused;
-}
-
-.equalizer.active span { animation-play-state: running; }
-.equalizer span:nth-child(3n) { animation-delay: -.7s; }
-.equalizer span:nth-child(3n + 1) { animation-delay: -.3s; }
-
-@keyframes wave {
-  from { height: 4px; }
-  to { height: 29px; }
-}
-
-.panel {
-  background: var(--panel);
-  border: 1px solid #10506a;
-  border-radius: 13px;
-  padding: 16px;
-  margin-top: 13px;
-  box-shadow: 0 8px 28px #0003;
-  backdrop-filter: blur(10px);
-}
-
-.panel-title {
-  color: var(--cyan);
-  font-size: 10px;
-  letter-spacing: 2px;
-  margin-bottom: 13px;
-}
-
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
-}
-
-.metric {
-  background: #061725;
-  border: 1px solid #10364a;
-  border-radius: 8px;
-  padding: 12px 6px;
-  text-align: center;
-  min-width: 0;
-}
-
-.metric .value {
-  font-size: 18px;
-  color: #e4fbff;
-  margin-bottom: 5px;
-  overflow-wrap: anywhere;
-}
-
-.metric .label {
-  font-size: 9px;
-  color: var(--muted);
-  letter-spacing: 1px;
-}
-
-#log {
-  height: 125px;
-  overflow-y: auto;
-  font-size: 12px;
-  line-height: 1.6;
-  color: #a8cbd9;
-  overflow-wrap: anywhere;
-}
-
-.log-line { margin: 5px 0; }
-.log-line b { color: var(--cyan); font-weight: 500; }
-
-.controls {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 14px;
-}
-
-button {
-  font: inherit;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.action {
-  min-height: 49px;
-  border-radius: 8px;
-  border: 1px solid #087d9d;
-  color: var(--cyan);
-  background: linear-gradient(135deg, #08324b, #061b2c);
-  font-size: 11px;
-  letter-spacing: 1px;
-  padding: 12px 8px;
-}
-
-.action.primary {
-  color: #001019;
-  background: linear-gradient(135deg, #00f0ff, #078cff);
-  border-color: #5cf6ff;
-  font-weight: 800;
-  box-shadow: 0 0 20px #00cfff30;
-}
-
-.action:active { transform: scale(.98); }
-
-.command-row {
-  display: flex;
-  gap: 8px;
-}
-
-input {
-  min-width: 0;
-  flex: 1;
-  padding: 13px 12px;
-  border-radius: 8px;
-  background: #020b14;
-  border: 1px solid #16455a;
-  color: white;
-  font-size: 14px;
-  outline: none;
-}
-
-input:focus { border-color: var(--cyan); }
-
-.send {
-  padding: 0 15px;
-  border: 1px solid #00cfff;
-  border-radius: 8px;
-  background: #07344a;
-  color: var(--cyan);
-}
-
-.commands {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-}
-
-.chip {
-  border: 1px solid #14516a;
-  background: #061b2b;
-  color: #a8e8f5;
-  border-radius: 30px;
-  font-size: 11px;
-  padding: 9px 12px;
-}
-
-footer {
-  text-align: center;
-  color: #527f91;
-  font-size: 9px;
-  letter-spacing: 2px;
-  margin-top: 23px;
-}
-
-@media (max-width: 380px) {
-  .brand { font-size: 18px; }
-  .core-wrap { height: 230px; }
-  .core { width: 150px; height: 150px; }
-  .core-inner { width: 95px; height: 95px; }
-  h1 { font-size: 24px; }
+.core:after { inset:-27px; border-color:#087fff77; border-top-color:transparent;
+  border-bottom-color:transparent; animation-duration:13s; animation-direction:reverse; }
+.core-inner { width:95px; height:95px; border-radius:50%; display:grid; place-items:center;
+  border:2px solid var(--cyan); background:radial-gradient(circle,#0a6b91,#031a2e 70%);
+  box-shadow:0 0 25px #00cfff88; }
+.core-inner span { font-size:28px; text-shadow:0 0 15px var(--cyan); }
+.core-wrap.listening .core { box-shadow:0 0 60px #00eaff88; }
+@keyframes spin { to { transform:rotate(360deg); } }
+@keyframes breathe { 0%,100% { transform:scale(.97); } 50% { transform:scale(1.03); } }
+h1 { font-size:27px; letter-spacing:6px; margin:10px 0; font-weight:500; }
+.subtitle { color:var(--muted); font-size:10px; letter-spacing:2px; }
+#status { color:var(--cyan); margin-top:17px; font-size:12px; letter-spacing:1px; }
+.panel { background:var(--panel); border:1px solid #10506a; border-radius:13px;
+  padding:16px; margin-top:13px; box-shadow:0 8px 28px #0003; }
+.panel-title { color:var(--cyan); font-size:10px; letter-spacing:2px; margin-bottom:13px; }
+.metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; }
+.metric { background:#061725; border:1px solid #10364a; border-radius:8px;
+  padding:12px 5px; text-align:center; min-width:0; }
+.value { font-size:17px; margin-bottom:5px; overflow-wrap:anywhere; }
+.label { font-size:9px; color:var(--muted); letter-spacing:1px; }
+#log { height:145px; overflow-y:auto; font-size:12px; line-height:1.6;
+  color:#a8cbd9; overflow-wrap:anywhere; }
+.log-line { margin:5px 0; }
+.log-line b { color:var(--cyan); font-weight:500; }
+.controls { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+button { font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.action { min-height:48px; border-radius:8px; border:1px solid #087d9d;
+  color:var(--cyan); background:linear-gradient(135deg,#08324b,#061b2c);
+  font-size:11px; letter-spacing:1px; padding:12px 8px; }
+.primary { color:#001019; background:linear-gradient(135deg,#00f0ff,#078cff);
+  border-color:#5cf6ff; font-weight:800; }
+.command-row { display:flex; gap:8px; }
+input { min-width:0; flex:1; padding:13px 12px; border-radius:8px;
+  background:#020b14; border:1px solid #16455a; color:white; font-size:14px; }
+.send { padding:0 14px; border:1px solid var(--cyan); border-radius:8px;
+  background:#07344a; color:var(--cyan); }
+.commands { display:flex; flex-wrap:wrap; gap:7px; }
+.chip { border:1px solid #14516a; background:#061b2b; color:#a8e8f5;
+  border-radius:30px; font-size:11px; padding:9px 12px; }
+footer { text-align:center; color:#527f91; font-size:9px; letter-spacing:2px; margin-top:23px; }
+@media(max-width:380px) {
+  .brand { font-size:18px; }
+  .status-pill { font-size:9px; }
+  h1 { font-size:23px; }
 }
 </style>
 </head>
-
 <body>
 <main>
   <header>
     <div>
       <div class="brand">J.A.R.V.I.S.</div>
-      <div class="version">PERSONAL AI SYSTEM · V2.0</div>
+      <div class="version">PERSONAL AI SYSTEM · V3.0</div>
     </div>
-    <div class="status-pill">
-      <span class="indicator"></span> SYSTEM READY
-    </div>
+    <div class="status-pill"><span class="indicator"></span> SYSTEM READY</div>
   </header>
 
   <section class="hero">
     <div class="eyebrow">JUST A RATHER VERY INTELLIGENT SYSTEM</div>
-
     <div class="core-wrap" id="coreWrap">
-      <div class="core">
-        <div class="orbit"></div>
-        <div class="core-inner"><span>J</span></div>
-      </div>
+      <div class="core"><div class="core-inner"><span>J</span></div></div>
     </div>
-
     <h1>J.A.R.V.I.S.</h1>
     <div class="subtitle">INTERFACE DE ASSISTÊNCIA PESSOAL</div>
-    <div id="status">SISTEMA INICIALIZADO</div>
-
-    <div class="equalizer" id="equalizer">
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-      <span></span>
-    </div>
+    <div id="status">INICIALIZANDO SISTEMA</div>
   </section>
 
   <section class="panel">
-    <div class="panel-title">▸ MONITORAMENTO DO SISTEMA</div>
+    <div class="panel-title">▸ MONITORAMENTO</div>
     <div class="metrics">
-      <div class="metric">
-        <div class="value" id="clock">--:--</div>
-        <div class="label">HORÁRIO LOCAL</div>
-      </div>
-      <div class="metric">
-        <div class="value" id="date">--/--</div>
-        <div class="label">DATA</div>
-      </div>
-      <div class="metric">
-        <div class="value" id="voiceState">PRONTO</div>
-        <div class="label">MÓDULO DE VOZ</div>
-      </div>
+      <div class="metric"><div class="value" id="clock">--:--</div><div class="label">HORÁRIO</div></div>
+      <div class="metric"><div class="value" id="date">--/--</div><div class="label">DATA</div></div>
+      <div class="metric"><div class="value" id="memoryState">CARREGANDO</div><div class="label">MEMÓRIA</div></div>
     </div>
   </section>
 
   <section class="panel">
     <div class="panel-title">▸ TERMINAL DE ATIVIDADE</div>
     <div id="log" aria-live="polite">
-      <div class="log-line"><b>[JARVIS]</b> Sistema carregado.</div>
-      <div class="log-line"><b>[JARVIS]</b> Aguardando instruções.</div>
+      <div class="log-line"><b>[JARVIS]</b> Inicializando interface...</div>
     </div>
   </section>
 
@@ -455,25 +143,25 @@ footer {
   <section class="panel">
     <div class="panel-title">▸ ENVIAR COMANDO</div>
     <form id="commandForm" class="command-row">
-      <input id="commandInput" type="text"
-        placeholder="Digite seu comando..." autocomplete="off">
+      <input id="commandInput" placeholder="Digite seu comando..." autocomplete="off">
       <button class="send" type="submit">ENVIAR</button>
     </form>
   </section>
 
   <section class="panel">
-    <div class="panel-title">▸ COMANDOS DISPONÍVEIS</div>
+    <div class="panel-title">▸ COMANDOS RÁPIDOS</div>
     <div class="commands">
       <button class="chip" data-command="Que horas são?">Que horas são?</button>
       <button class="chip" data-command="Qual é a data de hoje?">Data de hoje</button>
-      <button class="chip" data-command="Como você está?">Status do sistema</button>
+      <button class="chip" data-command="Como você está?">Status</button>
+      <button class="chip" data-command="Minha história com Grazi">Minha história com Grazi</button>
+      <button class="chip" data-command="O que aconteceu na Feira com Grazi?">Saga da Feira</button>
       <button class="chip" data-command="Abrir YouTube">Abrir YouTube</button>
       <button class="chip" data-command="Abrir Google">Abrir Google</button>
       <button class="chip" data-command="Ajuda">Ajuda</button>
     </div>
   </section>
-
-  <footer>J.A.R.V.I.S. PERSONAL INTERFACE · V2.0</footer>
+  <footer>J.A.R.V.I.S. PERSONAL INTERFACE · V3.0</footer>
 </main>
 
 <script>
@@ -481,13 +169,12 @@ footer {
   "use strict";
 
   const $ = id => document.getElementById(id);
-  const status = $("status");
   const log = $("log");
-  const coreWrap = $("coreWrap");
-  const equalizer = $("equalizer");
-  const voiceState = $("voiceState");
+  const status = $("status");
   const input = $("commandInput");
-
+  const coreWrap = $("coreWrap");
+  let memoriaGrazi = null;
+  let erroMemoria = false;
   let recognition = null;
   let listening = false;
   let manualStop = false;
@@ -495,17 +182,11 @@ footer {
   function addLog(who, message) {
     const line = document.createElement("div");
     line.className = "log-line";
-
     const label = document.createElement("b");
     label.textContent = "[" + who + "] ";
-
-    line.appendChild(label);
-    line.appendChild(document.createTextNode(message));
+    line.append(label, document.createTextNode(message));
     log.appendChild(line);
-
-    while (log.children.length > 35) {
-      log.removeChild(log.firstChild);
-    }
+    while (log.children.length > 40) log.removeChild(log.firstChild);
     log.scrollTop = log.scrollHeight;
   }
 
@@ -516,151 +197,209 @@ footer {
   function updateClock() {
     const now = new Date();
     $("clock").textContent = now.toLocaleTimeString("pt-BR", {
-      hour: "2-digit",
-      minute: "2-digit"
+      hour:"2-digit", minute:"2-digit"
     });
     $("date").textContent = now.toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit"
+      day:"2-digit", month:"2-digit"
     });
   }
-
   updateClock();
   setInterval(updateClock, 1000);
 
   function speak(message) {
     if (!("speechSynthesis" in window)) {
-      addLog("SISTEMA", "Voz sintetizada não disponível neste navegador.");
+      addLog("SISTEMA", "A voz sintetizada não está disponível neste navegador.");
       return;
     }
-
     window.speechSynthesis.cancel();
-
     const utterance = new SpeechSynthesisUtterance(message);
     utterance.lang = "pt-BR";
     utterance.rate = 1;
-    utterance.pitch = 0.88;
+    utterance.pitch = 0.9;
     utterance.volume = 1;
-
-    utterance.onstart = () => {
-      equalizer.classList.add("active");
-      setStatus("JARVIS FALANDO");
-    };
-
+    utterance.onstart = () => setStatus("JARVIS FALANDO");
     utterance.onend = () => {
-      equalizer.classList.remove("active");
       if (!listening) setStatus("AGUARDANDO COMANDO");
     };
-
     utterance.onerror = () => {
-      equalizer.classList.remove("active");
       if (!listening) setStatus("SISTEMA ONLINE");
     };
-
     window.speechSynthesis.speak(utterance);
   }
 
   function normalize(text) {
-    return text.toLocaleLowerCase("pt-BR")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .trim();
+    return String(text).toLocaleLowerCase("pt-BR")
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+  }
+
+  // Transforma seções do JSON em texto legível, sem depender
+  // de um formato único para cada campo da memória.
+  function collectText(value, result = []) {
+    if (typeof value === "string" && value.trim()) {
+      result.push(value.trim());
+    } else if (Array.isArray(value)) {
+      value.forEach(item => collectText(item, result));
+    } else if (value && typeof value === "object") {
+      Object.values(value).forEach(item => collectText(item, result));
+    }
+    return result;
+  }
+
+  function sectionText(section, limit = 240) {
+    const parts = collectText(section);
+    if (!parts.length) return "";
+    let text = parts.join(" ");
+    if (text.length > limit) text = text.slice(0, limit).replace(/\s+\S*$/, "") + "...";
+    return text;
+  }
+
+  function graziResponse(command) {
+    if (!memoriaGrazi) {
+      return erroMemoria
+        ? "Não consegui abrir meu arquivo de memória. Confira se memoria_grazi.json está publicado na mesma pasta deste site."
+        : "Ainda estou carregando minha memória sobre a Grazi. Tente novamente em alguns segundos.";
+    }
+
+    const h = memoriaGrazi.historia || {};
+    const c = normalize(command);
+
+    if (c.includes("feira")) {
+      const t = sectionText(h.saga_da_feira, 650);
+      return t
+        ? "Sobre a saga da Feira: " + t
+        : "A Feira foi um marco da reaproximação de vocês, com trabalho em grupo sobre relações interculturais, Japão e Brasil, decoração e preparação da apresentação.";
+    }
+
+    if (c.includes("sentimento") || c.includes("sinto") || c.includes("gosta de mim") || c.includes("amor")) {
+      const t = sectionText(memoriaGrazi.sentimentos || h.sentimentos, 450);
+      return (t ? "Sobre seus sentimentos: " + t + " " : "") +
+        "Lembro que seus sentimentos são fortes, mas não tenho como afirmar o que a Grazi sente romanticamente. É importante respeitar o relacionamento atual dela e cuidar de você também.";
+    }
+
+    if (c.includes("depois da feira") || c.includes("praia") || c.includes("bonsai")) {
+      const t = sectionText(h.depois_da_feira, 600);
+      return t
+        ? "Depois da Feira: " + t
+        : "Depois da Feira vocês continuaram em contato, houve um passeio com o grupo e a lembrança do bonsai compartilhado.";
+    }
+
+    const inicio = sectionText(h.inicio, 220);
+    const reaproximacao = sectionText(h.reaproximacao, 220);
+    const feira = sectionText(h.saga_da_feira, 270);
+    const depois = sectionText(h.depois_da_feira, 220);
+
+    const partes = [];
+    if (inicio) partes.push("No começo: " + inicio);
+    if (reaproximacao) partes.push("Reaproximação: " + reaproximacao);
+    if (feira) partes.push("A Feira: " + feira);
+    if (depois) partes.push("Depois da Feira: " + depois);
+
+    if (!partes.length) {
+      return "Tenho um arquivo de memória sobre vocês, mas não reconheci o formato de suas seções. Podemos ajustar o leitor para a estrutura exata do JSON.";
+    }
+
+    let resposta = partes.join(" ");
+    resposta += " Sei que essa história é importante para você. Guardo a diferença entre fatos, sentimentos e interpretações: gestos carinhosos não provam, sozinhos, interesse romântico.";
+    return resposta.slice(0, 1500);
   }
 
   function executeCommand(original) {
     const command = normalize(original);
-    if (
-  command.includes("grazi") ||
-  command.includes("minha historia") ||
-  command.includes("nossa historia")
-) {
-  if (!memoriaGrazi) {
-    speak("Ainda estou carregando minha memória sobre a Grazi. Tente novamente em alguns segundos.");
-    return;
-  }
-
-  const historia = memoriaGrazi.historia;
-  speak(
-    "Eu tenho registros da sua história com a Grazi. " +
-    "Vocês se conhecem há anos e voltaram a se aproximar na escola. " +
-    "A Feira foi um marco importante, com trabalhos em grupo e momentos de convivência. " +
-    "Depois da Feira, vocês continuaram conversando e tiveram outros momentos marcantes. " +
-    "Seus sentimentos são fortes, mas eu não posso afirmar que ela sente o mesmo por você."
-  );
-  return;
-}
     if (!command) return;
 
     addLog("VOCÊ", original);
     setStatus("PROCESSANDO COMANDO");
-
     let response = "";
 
-    if (command.includes("que horas") || command === "horas") {
+    if (command.includes("grazi") ||
+        command.includes("minha historia") ||
+        command.includes("nossa historia") ||
+        command.includes("feira") ||
+        command.includes("bonsai") ||
+        command.includes("praia")) {
+      response = graziResponse(command);
+
+    } else if (command.includes("que horas") || command === "horas") {
       response = "Agora são " + new Date().toLocaleTimeString("pt-BR", {
-        hour: "2-digit", minute: "2-digit"
+        hour:"2-digit", minute:"2-digit"
       }) + ".";
+
     } else if (command.includes("data de hoje") ||
-               command.includes("dia e hoje") ||
-               command.includes("qual e a data") ||
-               command === "data") {
+               command.includes("qual e a data") || command === "data") {
       response = "Hoje é " + new Date().toLocaleDateString("pt-BR", {
-        weekday: "long", day: "numeric", month: "long", year: "numeric"
+        weekday:"long", day:"numeric", month:"long", year:"numeric"
       }) + ".";
+
     } else if (command.includes("como voce esta") ||
-               command.includes("status") ||
-               command.includes("sistema online")) {
-      response = "Todos os módulos locais estão prontos. Estou aguardando suas instruções.";
-    } else if (command.includes("seu nome") ||
-               command.includes("quem e voce") ||
-               command.includes("quem e voce")) {
-      response = "Eu sou JARVIS, seu assistente pessoal. Sistema pronto para ajudar.";
-    } else if (command.includes("obrigado") ||
-               command.includes("obrigada")) {
+               command.includes("status")) {
+      response = "Todos os módulos locais estão prontos. " +
+        (memoriaGrazi ? "A memória da Grazi está carregada." :
+        "A memória da Grazi ainda não está disponível.");
+
+    } else if (command.includes("seu nome") || command.includes("quem e voce")) {
+      response = "Eu sou JARVIS, seu assistente pessoal. Estou pronto para ajudar.";
+
+    } else if (command.includes("obrigado") || command.includes("obrigada")) {
       response = "Sempre à disposição.";
-    } else if (command.includes("ola") ||
-               command.includes("bom dia") ||
-               command.includes("boa tarde") ||
-               command.includes("boa noite")) {
-      response = "Olá. É um prazer falar com você. Como posso ajudar?";
+
+    } else if (command.includes("ola") || command.includes("bom dia") ||
+               command.includes("boa tarde") || command.includes("boa noite")) {
+      response = "Olá! Como posso ajudar?";
+
     } else if (command.includes("abrir youtube")) {
       response = "Abrindo o YouTube.";
-      window.open("https://www.youtube.com/", "_blank", "noopener");
+      window.open("https://www.youtube.com/", "_blank");
+
     } else if (command.includes("abrir google")) {
       response = "Abrindo o Google.";
-      window.open("https://www.google.com/", "_blank", "noopener");
+      window.open("https://www.google.com/", "_blank");
+
     } else if (command.includes("abrir instagram")) {
       response = "Abrindo o Instagram.";
-      window.open("https://www.instagram.com/", "_blank", "noopener");
-    } else if (command.includes("ajuda") ||
-               command.includes("comandos")) {
-      response = "Você pode perguntar as horas, consultar a data, verificar meu status ou pedir para abrir YouTube, Google e Instagram.";
+      window.open("https://www.instagram.com/", "_blank");
+
     } else if (command.includes("parar de falar")) {
       if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-      response = "Entendido.";
+      response = "Entendido. Parei a fala.";
+
+    } else if (command.includes("ajuda") || command.includes("comandos")) {
+      response = "Pergunte as horas, consulte a data, verifique o status, " +
+        "pergunte sobre a Grazi ou a Feira, ou peça para abrir YouTube e Google.";
+
     } else {
-      response = "Ainda não tenho uma resposta para esse comando. Tente perguntar as horas, consultar a data ou dizer ajuda.";
+      response = "Ainda não tenho uma resposta programada para esse comando. " +
+        "Posso responder aos comandos disponíveis e consultar minha memória sobre a Grazi.";
     }
 
     addLog("JARVIS", response);
     speak(response);
+  }
 
-    if (!("speechSynthesis" in window)) {
-      setStatus("COMANDO PROCESSADO");
+  // A variável e o carregamento ficam no mesmo escopo dos comandos.
+  async function loadMemory() {
+    try {
+      const resposta = await fetch("./memoria_grazi.json", { cache:"no-store" });
+      if (!resposta.ok) throw new Error("HTTP " + resposta.status);
+      const dados = await resposta.json();
+      memoriaGrazi = dados;
+      erroMemoria = false;
+      $("memoryState").textContent = "ONLINE";
+      addLog("MEMÓRIA", "Arquivo memoria_grazi.json carregado.");
+    } catch (error) {
+      memoriaGrazi = null;
+      erroMemoria = true;
+      $("memoryState").textContent = "ERRO";
+      addLog("MEMÓRIA", "Falha ao carregar memoria_grazi.json. Confira o nome e a publicação.");
     }
   }
 
   function startListening() {
-    const SpeechRecognition = window.SpeechRecognition ||
-                              window.webkitSpeechRecognition;
-
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      voiceState.textContent = "INDISPONÍVEL";
-      setStatus("VOZ NÃO SUPORTADA NESTE NAVEGADOR");
-      addLog("SISTEMA", "Reconhecimento de voz não está disponível. Use o campo de texto.");
+      addLog("SISTEMA", "Reconhecimento de voz indisponível. Use o campo de texto.");
+      setStatus("USE O CAMPO DE TEXTO");
       return;
     }
-
     if (listening) return;
 
     try {
@@ -668,61 +407,35 @@ footer {
       recognition.lang = "pt-BR";
       recognition.continuous = false;
       recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
-
       manualStop = false;
 
       recognition.onstart = () => {
         listening = true;
-        voiceState.textContent = "ESCUTANDO";
         coreWrap.classList.add("listening");
-        equalizer.classList.add("active");
         setStatus("ESTOU ESCUTANDO...");
         addLog("SISTEMA", "Microfone ativado. Pode falar.");
       };
-
-      recognition.onresult = event => {
-        const transcript = event.results[0][0].transcript;
-        executeCommand(transcript);
-      };
-
+      recognition.onresult = event => executeCommand(event.results[0][0].transcript);
       recognition.onerror = event => {
-        addLog("SISTEMA", "Erro de voz: " + event.error + ".");
-        if (event.error === "not-allowed" ||
-            event.error === "service-not-allowed") {
-          setStatus("PERMISSÃO DE MICROFONE NECESSÁRIA");
-        } else if (event.error === "no-speech") {
-          setStatus("NENHUMA FALA DETECTADA");
-        } else {
-          setStatus("VOZ INDISPONÍVEL");
-        }
+        addLog("SISTEMA", "Erro de voz: " + event.error);
+        setStatus("ERRO NO RECONHECIMENTO DE VOZ");
       };
-
       recognition.onend = () => {
         listening = false;
-        voiceState.textContent = "PRONTO";
         coreWrap.classList.remove("listening");
-        equalizer.classList.remove("active");
         if (!manualStop) setStatus("AGUARDANDO COMANDO");
       };
-
       recognition.start();
     } catch (error) {
-      listening = false;
-      setStatus("NÃO FOI POSSÍVEL INICIAR A VOZ");
-      addLog("SISTEMA", "Confira a permissão do microfone e tente novamente.");
+      addLog("SISTEMA", "Não foi possível iniciar o microfone. Tente novamente.");
     }
   }
 
   function stopListening() {
     manualStop = true;
-    if (recognition && listening) {
-      recognition.stop();
-    }
+    if (recognition && listening) recognition.stop();
     listening = false;
-    voiceState.textContent = "PRONTO";
     coreWrap.classList.remove("listening");
-    equalizer.classList.remove("active");
     setStatus("ESCUTA ENCERRADA");
     addLog("SISTEMA", "Escuta encerrada.");
   }
@@ -739,27 +452,12 @@ footer {
   });
 
   document.querySelectorAll("[data-command]").forEach(button => {
-    button.addEventListener("click", () => {
-      executeCommand(button.dataset.command);
-    });
+    button.addEventListener("click", () => executeCommand(button.dataset.command));
   });
 
-  addLog("SISTEMA", "Interface JARVIS V2.0 pronta.");
+  addLog("SISTEMA", "Interface JARVIS V3.0 pronta.");
+  loadMemory();
 })();
-  let memoriaGrazi = null;
-
-fetch("./memoria_grazi.json")
-  .then(resposta => {
-    if (!resposta.ok) throw new Error("Erro ao carregar");
-    return resposta.json();
-  })
-  .then(dados => {
-    memoriaGrazi = dados;
-    addLog("MEMÓRIA", "História com Grazi carregada.");
-  })
-  .catch(() => {
-    addLog("MEMÓRIA", "Falha ao carregar a memória.");
-  });
 </script>
 </body>
 </html>
