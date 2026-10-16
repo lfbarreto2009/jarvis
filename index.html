@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JARVIS</title>
+<style>
+body {
+  background: #050b14;
+  color: #59e7ff;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 40px 15px;
+}
+h1 { letter-spacing: 8px; }
+.orb {
+  width: 150px;
+  height: 150px;
+  border: 3px solid #59e7ff;
+  border-radius: 50%;
+  margin: 40px auto;
+  box-shadow: 0 0 35px #168bff;
+  display: grid;
+  place-items: center;
+}
+.core {
+  width: 45px;
+  height: 45px;
+  background: #59e7ff;
+  border-radius: 50%;
+  box-shadow: 0 0 30px #59e7ff;
+}
+button {
+  background: #102a40;
+  border: 1px solid #59e7ff;
+  border-radius: 10px;
+  padding: 14px;
+  color: white;
+  font-size: 16px;
+}
+</style>
+</head>
+<body>
+<h1>J.A.R.V.I.S.</h1>
+<p>SISTEMA PESSOAL INICIALIZADO</p>
+<div class="orb"><div class="core"></div></div>
+<p id="status">AGUARDANDO COMANDO</p>
+<button onclick="document.getElementById('status').textContent='JARVIS ONLINE'">
+INICIAR SISTEMA
+</button>
+</body>
+</html>
